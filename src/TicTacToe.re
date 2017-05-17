@@ -43,12 +43,10 @@ module TicTacToe = {
     | CrossPlayer => CirclePlayer
     | CirclePlayer => CrossPlayer
     };
-  let isFull player (f1, f2, f3) => {
-    let f = playerToFieldType player;
-    f1 == f2 && f2 == f3 && f3 == f
-  };
+  let isFull f (f1, f2, f3) => f == f1 && f1 == f2 && f2 == f3;
   let hasWon player (r1, r2, r3) => {
-    let isFull_ = isFull player;
+    let f = playerToFieldType player;
+    let isFull_ = isFull f;
     let (f11, f12, f13) = r1;
     let (f21, f22, f23) = r2;
     let (f31, f32, f33) = r3;
