@@ -74,8 +74,6 @@ module TicTacToe = {
     }
   };
   let restart _ _ => Some initialState;
-  let renderRestart updater =>
-    <button onClick=(updater restart)> (ReactRe.stringToElement "Restart") </button>;
   let render {state, updater} =>
     <div>
       <div>
@@ -92,10 +90,8 @@ module TicTacToe = {
       <div>
         (
           switch state.gameState {
-          | Won CrossPlayer => renderRestart updater
-          | Won CirclePlayer => renderRestart updater
-          | Tie => renderRestart updater
           | Playing => ReactRe.nullElement
+          | _ => <button onClick=(updater restart)> (ReactRe.stringToElement "Restart") </button>
           }
         )
       </div>
