@@ -20,3 +20,8 @@ type colIdType =
 type playerType =
   | CrossPlayer
   | CirclePlayer;
+
+type gameStateType =
+  | Playing
+  | Won playerType
+  | Tie;
