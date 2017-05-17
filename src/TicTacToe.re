@@ -62,17 +62,20 @@ module TicTacToe = {
   let fieldsHaveEmptyField (f1, f2, f3) => f1 == Empty || f2 == Empty || f3 == Empty;
   let rowsHaveEmptyField (r1, r2, r3) =>
     fieldsHaveEmptyField r1 || fieldsHaveEmptyField r2 || fieldsHaveEmptyField r3;
-  let playTurn {state} (rid, cid) => {
-    let oldBoard = state.board;
-    let newBoard = updateBoard state.player rid cid oldBoard;
-    Some {
-      board: newBoard,
-      player: newBoard == oldBoard ? state.player : switchPlayer state.player,
-      gameState:
-        hasWon state.player newBoard ?
-          Won state.player : rowsHaveEmptyField newBoard ? Playing : Tie
-    }
-  };
+  let playTurn {state} (rid, cid) =>
+    if (state.gameState == Playing) {
+      let oldBoard = state.board;
+      let newBoard = updateBoard state.player rid cid oldBoard;
+      Some {
+        board: newBoard,
+        player: newBoard == oldBoard ? state.player : switchPlayer state.player,
+        gameState:
+          hasWon state.player newBoard ?
+            Won state.player : rowsHaveEmptyField newBoard ? Playing : Tie
+      }
+    } else {
+      None
+    };
   let restart _ _ => Some initialState;
   let render {state, updater} =>
     <div>
