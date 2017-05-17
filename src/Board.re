@@ -3,28 +3,32 @@ open Game;
 module Board = {
   include ReactRe.Component;
   let name = "Board";
-  type props = {rows: (row, row, row), handleClick: (rowId, colId) => unit};
-  let renderField handleClick t (cid: colId) (rid: rowId) =>
+  type props = {board: boardType, handleClick: (rowIdType, colIdType) => unit};
+  let renderField handleClick (field: fieldType) (cid: colIdType) (rid: rowIdType) =>
     <span className="field" onClick=(fun _evt => handleClick (rid, cid))>
       (
-        switch t {
+        switch field {
         | Cross => ReactRe.stringToElement "x"
         | Circle => ReactRe.stringToElement "o"
         | Empty => ReactRe.stringToElement " "
         }
       )
     </span>;
-  let renderRow handleClick (t1, t2, t3) rid => {
-    let rf = renderField handleClick;
-    <div className="row"> (rf t1 C1 rid) (rf t2 C2 rid) (rf t3 C3 rid) </div>
+  let renderRow handleClick (f1, f2, f3) rid => {
+    let renderField_ = renderField handleClick;
+    <div className="row">
+      (renderField_ f1 C1 rid)
+      (renderField_ f2 C2 rid)
+      (renderField_ f3 C3 rid)
+    </div>
   };
   let render {props} => {
-    let (r1, r2, r3) = props.rows;
-    let rr = renderRow props.handleClick;
-    <div className="board"> (rr r1 R1) (rr r2 R2) (rr r3 R3) </div>
+    let (r1, r2, r3) = props.board;
+    let renderRow_ = renderRow props.handleClick;
+    <div className="board"> (renderRow_ r1 R1) (renderRow_ r2 R2) (renderRow_ r3 R3) </div>
   };
 };
 
 include ReactRe.CreateComponent Board;
 
-let createElement ::rows ::handleClick => wrapProps {rows, handleClick};
+let createElement ::board ::handleClick => wrapProps {board, handleClick};

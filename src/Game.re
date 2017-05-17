@@ -1,18 +1,18 @@
-type token =
+type fieldType =
   | Cross
   | Circle
   | Empty;
 
-type row = (token, token, token);
+type rowType = (fieldType, fieldType, fieldType);
 
-type boardType = (row, row, row);
+type boardType = (rowType, rowType, rowType);
 
-type rowId =
+type rowIdType =
   | R1
   | R2
   | R3;
 
-type colId =
+type colIdType =
   | C1
   | C2
   | C3;

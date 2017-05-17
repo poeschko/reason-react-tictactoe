@@ -1,12 +1,12 @@
 open Game;
 
-module TicTacToeApp = {
+module TicTacToe = {
   include ReactRe.Component.Stateful;
   let name = "TicTacToe";
   type props = unit;
-  type state = {rows: (row, row, row), player: playerType};
+  type state = {board: boardType, player: playerType};
   let getInitialState _ => {
-    rows: ((Empty, Empty, Empty), (Empty, Empty, Empty), (Empty, Empty, Empty)),
+    board: ((Empty, Empty, Empty), (Empty, Empty, Empty), (Empty, Empty, Empty)),
     player: CrossPlayer
   };
   let playerToToken player =>
@@ -14,39 +14,41 @@ module TicTacToeApp = {
     | CrossPlayer => Cross
     | CirclePlayer => Circle
     };
-  let updateCol player field =>
+  let updateField player field =>
     switch field {
     | Empty => playerToToken player
     | Cross => field
     | Circle => field
     };
-  let updateRow cid player (t1, t2, t3) => {
-    let uc = updateCol player;
+  let updateRow player cid (f1, f2, f3) => {
+    let updateField_ = updateField player;
     switch cid {
-    | C1 => (uc t1, t2, t3)
-    | C2 => (t1, uc t2, t3)
-    | C3 => (t1, t2, uc t3)
+    | C1 => (updateField_ f1, f2, f3)
+    | C2 => (f1, updateField_ f2, f3)
+    | C3 => (f1, f2, updateField_ f3)
     }
   };
-  let changePlayer player =>
+  let updateBoard player rid cid (r1, r2, r3) => {
+    let updateRow_ = updateRow player cid;
+    switch rid {
+    | R1 => (updateRow_ r1, r2, r3)
+    | R2 => (r1, updateRow_ r2, r3)
+    | R3 => (r1, r2, updateRow_ r3)
+    }
+  };
+  let switchPlayer player =>
     switch player {
     | CrossPlayer => CirclePlayer
     | CirclePlayer => CrossPlayer
     };
   let playTurn {state} (rid, cid) => {
-    let (r1, r2, r3) = state.rows;
-    let ur = updateRow cid state.player;
-    let newRows =
-      switch rid {
-      | R1 => (ur r1, r2, r3)
-      | R2 => (r1, ur r2, r3)
-      | R3 => (r1, r2, ur r3)
-      };
-    Some {rows: newRows, player: changePlayer state.player}
+    let oldBoard = state.board;
+    let newBoard = updateBoard state.player rid cid oldBoard;
+    Some {board: newBoard, player: newBoard == oldBoard ? state.player : switchPlayer state.player}
   };
-  let render {state, updater} => <Board rows=state.rows handleClick=(updater playTurn) />;
+  let render {state, updater} => <Board board=state.board handleClick=(updater playTurn) />;
 };
 
-include ReactRe.CreateComponent TicTacToeApp;
+include ReactRe.CreateComponent TicTacToe;
 
 let createElement = wrapProps ();
