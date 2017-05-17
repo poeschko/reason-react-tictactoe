@@ -12,3 +12,5 @@ A simple tic-tac-toe implementation using [Reason](https://facebook.github.io/re
     npm run build
 
 Then open [src/index.html](./src/index.html) to play a round of tic-tac-toe against yourself.
+
+Take a look at [ReasonVienna/dev-setup](https://github.com/ReasonVienna/dev-setup) for a very reasonable description of how to set up your development environment.
