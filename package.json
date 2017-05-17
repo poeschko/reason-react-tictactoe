@@ -1,0 +1,28 @@
+{
+  "name": "reason-react-tictactoe",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Tic-tac-toe implemented using Reason and React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "bsb -make-world -w",
+    "build": "webpack -w",
+    "clean": "bsb -clean-world"
+  },
+  "keywords": [],
+  "author": "Jan Poeschko <jan@poeschko.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bs-director": "^0.0.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "reason-react": "https://github.com/reasonml/reason-react.git",
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.1"
+  },
+  "devDependencies": {
+    "bs-platform": "^1.7.3",
+    "webpack": "^1.14.0"
+  }
+}

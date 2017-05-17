@@ -1,0 +1,1 @@
+ReactDOMRe.renderToElementWithClassName <TicTacToe /> "tictactoe";

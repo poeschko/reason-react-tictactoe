@@ -1,0 +1,14 @@
+.board {
+    display: table;
+}
+
+.row {
+    display: table-row;
+}
+
+.field {
+    display: table-cell;
+    width: 2em;
+    height: 2em;
+    border: 1px solid gray;
+}
