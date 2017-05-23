@@ -8,8 +8,8 @@ module Board = {
     <span className="field" onClick=(fun _evt => handleClick (rid, cid))>
       (
         switch field {
-        | Cross => ReactRe.stringToElement "x"
-        | Circle => ReactRe.stringToElement "o"
+        | Cross => ReactRe.stringToElement {js|✕|js}
+        | Circle => ReactRe.stringToElement {js|◯|js}
         | Empty => ReactRe.stringToElement " "
         }
       )
