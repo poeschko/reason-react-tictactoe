@@ -78,6 +78,7 @@ module TicTacToe = {
   let render {state, updater} =>
     <div className="container">
       <h1> (ReactRe.stringToElement "Tic Tac Toe") </h1>
+      <GitHubRibbon url="https://github.com/poeschko/reason-react-tictactoe" />
       <Board board=state.board gameState=state.gameState handleClick=(updater playTurn) />
       <p>
         (
