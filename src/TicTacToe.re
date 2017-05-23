@@ -76,8 +76,10 @@ module TicTacToe = {
     };
   let restart _ _ => Some initialState;
   let render {state, updater} =>
-    <div>
-      <div>
+    <div className="container">
+      <h1> (ReactRe.stringToElement "Tic Tac Toe") </h1>
+      <Board board=state.board gameState=state.gameState handleClick=(updater playTurn) />
+      <p>
         (
           switch state.gameState {
           | Playing => ReactRe.nullElement
@@ -86,8 +88,7 @@ module TicTacToe = {
           | Tie => ReactRe.stringToElement "Tie!"
           }
         )
-      </div>
-      <Board board=state.board handleClick=(updater playTurn) />
+      </p>
       <div>
         (
           switch state.gameState {
