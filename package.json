@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "bsb -make-world -w",
     "build": "webpack -w",
-    "clean": "bsb -clean-world"
+    "clean": "bsb -clean-world",
+    "docs": "bsb -make-world && webpack && mkdir -p docs && cp bundledOutputs/bundle.js docs/bundle.js && cp src/styles.css docs/styles.css && cp src/index.html docs/index.html && sed -i '' 's/\\.\\.\\/bundledOutputs\\/bundle\\.js/\\.\\/bundle\\.js/g' docs/index.html"
   },
   "keywords": [],
   "author": "Jan Poeschko <jan@poeschko.com>",
