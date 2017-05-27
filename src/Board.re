@@ -38,7 +38,7 @@ module Board = {
   let render {props} => {
     let (r1, r2, r3) = props.board;
     let renderRow_ = renderRow props.handleClick;
-    <div className=(Glamor.css display::"inline-table" cursor::"default" [])>
+    <div className=(Glamor.css display::"inline-table" cursor::"default" userSelect::"none" [])>
       (renderRow_ r1 R1)
       (renderRow_ r2 R2)
       (renderRow_ r3 R3)
