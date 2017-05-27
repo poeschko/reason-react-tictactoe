@@ -1,5 +1,37 @@
 open Game;
 
+external styledDiv : array string => ReactRe.reactClass =
+  "div" [@@bs.scope "default"] [@@bs.module "styled-components"];
+
+module type StyleDefinition = {
+  /* We currently assume that the CSS is just a simple string. Props interpolation isn't supported. */
+  let css: string;
+};
+
+module StyledDiv (StyleDef: StyleDefinition) => {
+  module StyledDivMod = {
+    include ReactRe.Component;
+    let name = "Styled.Div";
+    type props = {children: list ReactRe.reactElement};
+    let render {props} =>
+      ReactRe.createElement (styledDiv [|StyleDef.css|]) [|ReactRe.listToElement props.children|];
+  };
+  include ReactRe.CreateComponent StyledDivMod;
+  let createElement ::children => wrapProps ::children {children: children};
+};
+
+module BoardDivStyle = {
+  let css = {j|
+    display: inline-table;
+    user-select: none;
+    cursor: default;
+  |j};
+};
+
+module BoardDiv = {
+  include StyledDiv BoardDivStyle;
+};
+
 module Board = {
   include ReactRe.Component;
   let name = "Board";
@@ -38,16 +70,7 @@ module Board = {
   let render {props} => {
     let (r1, r2, r3) = props.board;
     let renderRow_ = renderRow props.handleClick;
-    let cls =
-      "board " ^ (
-        switch props.gameState {
-        | Playing => "playing"
-        | Won CrossPlayer => "won cross"
-        | Won CirclePlayer => "won circle"
-        | Tie => "tie"
-        }
-      );
-    <div className=cls> (renderRow_ r1 R1) (renderRow_ r2 R2) (renderRow_ r3 R3) </div>
+    <BoardDiv> (renderRow_ r1 R1) (renderRow_ r2 R2) (renderRow_ r3 R3) </BoardDiv>
   };
 };
 
