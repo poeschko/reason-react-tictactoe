@@ -7,20 +7,14 @@ module TicTacToe = {
   type state = {board: boardType, player: playerType, gameState: gameStateType};
   let initialState = {
     board: ((Empty, Empty, Empty), (Empty, Empty, Empty), (Empty, Empty, Empty)),
-    player: CrossPlayer,
+    player: Cross,
     gameState: Playing
   };
   let getInitialState _ => initialState;
-  let playerToFieldType player =>
-    switch player {
-    | CrossPlayer => Cross
-    | CirclePlayer => Circle
-    };
   let updateField player field =>
     switch field {
-    | Empty => playerToFieldType player
-    | Cross => field
-    | Circle => field
+    | Empty => Filled player
+    | Filled _ => field
     };
   let updateRow player cid (f1, f2, f3) => {
     let updateField_ = updateField player;
@@ -40,12 +34,12 @@ module TicTacToe = {
   };
   let switchPlayer player =>
     switch player {
-    | CrossPlayer => CirclePlayer
-    | CirclePlayer => CrossPlayer
+    | Cross => Circle
+    | Circle => Cross
     };
   let isFull f (f1, f2, f3) => f == f1 && f1 == f2 && f2 == f3;
   let hasWon player (r1, r2, r3) => {
-    let f = playerToFieldType player;
+    let f = Filled player;
     let isFull_ = isFull f;
     let (f11, f12, f13) = r1;
     let (f21, f22, f23) = r2;
@@ -76,7 +70,7 @@ module TicTacToe = {
     };
   let restart _ _ => Some initialState;
   let render {state, updater} =>
-    <div className="container">
+    <div className=(Glamor.css textAlign::"center" [])>
       <h1> (ReactRe.stringToElement "Tic Tac Toe") </h1>
       <GitHubRibbon url="https://github.com/poeschko/reason-react-tictactoe" />
       <Board board=state.board gameState=state.gameState handleClick=(updater playTurn) />
@@ -84,8 +78,8 @@ module TicTacToe = {
         (
           switch state.gameState {
           | Playing => ReactRe.nullElement
-          | Won CrossPlayer => ReactRe.stringToElement "Cross has won!"
-          | Won CirclePlayer => ReactRe.stringToElement "Circle has won!"
+          | Won Cross => ReactRe.stringToElement "Cross has won!"
+          | Won Circle => ReactRe.stringToElement "Circle has won!"
           | Tie => ReactRe.stringToElement "Tie!"
           }
         )

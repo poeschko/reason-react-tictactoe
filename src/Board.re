@@ -13,15 +13,15 @@ module Board = {
       "field " ^ (
         switch field {
         | Empty => "empty"
-        | Cross => "cross"
-        | Circle => "circle"
+        | Filled Cross => "cross"
+        | Filled Circle => "circle"
         }
       );
     <span className=cls onClick=(fun _evt => handleClick (rid, cid))>
       (
         switch field {
-        | Cross => ReactRe.stringToElement {js|✕|js}
-        | Circle => ReactRe.stringToElement {js|◯|js}
+        | Filled Cross => ReactRe.stringToElement {js|✕|js}
+        | Filled Circle => ReactRe.stringToElement {js|◯|js}
         | Empty => ReactRe.stringToElement " "
         }
       )

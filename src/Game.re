@@ -1,6 +1,9 @@
-type fieldType =
+type playerType =
   | Cross
-  | Circle
+  | Circle;
+
+type fieldType =
+  | Filled playerType
   | Empty;
 
 type rowType = (fieldType, fieldType, fieldType);
@@ -16,10 +19,6 @@ type colIdType =
   | C1
   | C2
   | C3;
-
-type playerType =
-  | CrossPlayer
-  | CirclePlayer;
 
 type gameStateType =
   | Playing
