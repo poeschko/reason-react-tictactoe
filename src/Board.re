@@ -12,11 +12,11 @@ module Board = {
     let cursor = gameState == Playing ? "pointer" : "default";
     let backgroundColor =
       switch gameState {
-      | Playing => ""
-      | Tie => ""
-      | Won player => field == Filled player ? "lightgreen" : ""
+      | Playing => None
+      | Tie => None
+      | Won player => field == Filled player ? Some "lightgreen" : None
       };
-    let hoverBackground = gameState == Playing && field == Empty ? "lightblue" : "";
+    let hoverBackground = gameState == Playing && field == Empty ? Some "lightblue" : None;
     let cls =
       Glamor.css
         display::"table-cell"
@@ -28,8 +28,8 @@ module Board = {
         fontSize::"50px"
         fontWeight::"bold"
         ::cursor
-        ::backgroundColor
-        [Glamor.selector ":hover" backgroundColor::hoverBackground []];
+        ::?backgroundColor
+        [Glamor.selector ":hover" backgroundColor::?hoverBackground []];
     <span className=cls onClick=(fun _evt => handleClick (rid, cid))>
       (
         switch field {
