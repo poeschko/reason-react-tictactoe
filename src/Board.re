@@ -20,16 +20,15 @@ module StyledDiv (StyleDef: StyleDefinition) => {
   let createElement ::children => wrapProps ::children {children: children};
 };
 
-module BoardDivStyle = {
-  let css = {j|
-    display: inline-table;
-    user-select: none;
-    cursor: default;
-  |j};
-};
-
 module BoardDiv = {
-  include StyledDiv BoardDivStyle;
+  include
+    StyledDiv {
+      let css = {j|
+        display: inline-table;
+        user-select: none;
+        cursor: default;
+      |j};
+    };
 };
 
 module Board = {
