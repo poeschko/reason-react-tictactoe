@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "bs-director": "^0.0.1",
+    "glamor": "^2.20.25",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "reason-react": "https://github.com/reasonml/reason-react.git",
