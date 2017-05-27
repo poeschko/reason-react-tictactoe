@@ -1,3 +1,24 @@
+/*
+ A ReasonML bridge to glamor for CSS-in-JS/Reason.
+
+ Usage:
+
+ * Simple styling:
+
+    <div className=(Glamor.css color::"red" border::"1px solid black" [])> </div>
+
+ * Styling with selectors (@media, :hover, &, etc.):
+
+    <div className=(Glamor.css color::"red" [Glamor.selector "@media (min-width: 300px)" color::"green" []])> </div>
+
+ * Selectors can be nested:
+
+    <div className=(Glamor.css color::"red" [Glamor.selector "@media (min-width: 300px)" color::"green" [Glamor.selector "& .foo" color::"blue" []]])> </div>
+
+ The list of CSS properties was taken from reactDOMRe.re.
+
+ It's really ugly that the labeled function arguments have to be repeated that often.
+ */
 type styleObj;
 
 external makeCSS : styleObj => string = "css" [@@bs.module "glamor"];
