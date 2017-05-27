@@ -25,11 +25,11 @@ let combineStyles: styleObj => styleObj => styleObj = [%bs.raw
     |}
 ];
 
-let makeStyle ::display ::cursor extra => {
-  let styles = makeObj ::display ::cursor ();
+let makeStyle ::display=? ::cursor=? extra => {
+  let styles = makeObj ::?display ::?cursor ();
   List.fold_left addSelectorToStyles styles extra
 };
 
-let selector key ::display ::cursor extra => (key, makeStyle ::display ::cursor extra);
+let selector key ::display=? ::cursor=? extra => (key, makeStyle ::?display ::?cursor extra);
 
-let css ::display ::cursor extra => makeCSS (makeStyle ::display ::cursor extra);
+let css ::display=? ::cursor=? extra => makeCSS (makeStyle ::?display ::?cursor extra);
