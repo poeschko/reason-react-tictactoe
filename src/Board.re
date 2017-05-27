@@ -1,8 +1,5 @@
 open Game;
 
-/* We only accept a ReactDOMRe.style for now, but this should really be a more complex object that also supports e.g. media queries. */
-external css : ReactDOMRe.style => string = "css" [@@bs.module "glamor"];
-
 module Board = {
   include ReactRe.Component;
   let name = "Board";
@@ -41,10 +38,7 @@ module Board = {
   let render {props} => {
     let (r1, r2, r3) = props.board;
     let renderRow_ = renderRow props.handleClick;
-    <div
-      className=(
-        css (ReactDOMRe.Style.make display::"inline-table" userSelect::"none" cursor::"default" ())
-      )>
+    <div className=(Glamor.css display::"inline-table" cursor::"default" [])>
       (renderRow_ r1 R1)
       (renderRow_ r2 R2)
       (renderRow_ r3 R3)
