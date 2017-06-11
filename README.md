@@ -1,6 +1,6 @@
 # Tic-tac-toe with Reason + React
 
-A simple tic-tac-toe implementation using [Reason](https://facebook.github.io/reason/) and [Reason-React](https://github.com/reasonml/reason-react), built on top of the boilerplate from [chenglou/reason-react-example](https://github.com/chenglou/reason-react-example).
+A simple tic-tac-toe implementation using [Reason](https://facebook.github.io/reason/) and [Reason-React](https://github.com/reasonml/reason-react), built on top of the boilerplate from [chenglou/reason-react-example](https://github.com/chenglou/reason-react-example), using [bs-glamor](https://github.com/poeschko/bs-glamor) for styling.
 
 [Live Demo](https://poeschko.github.io/reason-react-tictactoe/)
 
