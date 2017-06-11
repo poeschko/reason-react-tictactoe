@@ -2,9 +2,14 @@ type playerType =
   | Cross
   | Circle;
 
+type gameStateType =
+  | Playing
+  | Won playerType
+  | Tie;
+
 type fieldType =
-  | Filled playerType
-  | Empty;
+  | Empty
+  | Filled playerType;
 
 type rowType = (fieldType, fieldType, fieldType);
 
@@ -19,8 +24,3 @@ type colIdType =
   | C1
   | C2
   | C3;
-
-type gameStateType =
-  | Playing
-  | Won playerType
-  | Tie;
