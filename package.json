@@ -22,7 +22,6 @@
     "url": "git+https://github.com/poeschko/reason-react-tictactoe.git"
   },
   "dependencies": {
-    "bs-director": "^0.0.1",
     "bs-glamor": "^0.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

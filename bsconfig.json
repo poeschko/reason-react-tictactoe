@@ -5,7 +5,6 @@
   },
   "bs-dependencies": [
     "reason-react",
-    "bs-director",
     "bs-glamor"
   ],
   "sources": [
