@@ -1,6 +1,6 @@
 open Game;
 
-open CSS;
+open Glamor;
 
 module Board = {
   include ReactRe.Component;
@@ -20,7 +20,7 @@ module Board = {
       };
     let hover = gameState == Playing && field == Empty ? background "lightblue" : Nothing;
     let cls =
-      Glamor.css [
+      css [
         display "table-cell",
         width "80px",
         height "80px",
@@ -45,7 +45,7 @@ module Board = {
   };
   let renderRow props (f1, f2, f3) rid => {
     let renderField_ = renderField props;
-    <div className=(Glamor.css [display "table-row"])>
+    <div className=(css [display "table-row"])>
       (renderField_ f1 C1 rid)
       (renderField_ f2 C2 rid)
       (renderField_ f3 C3 rid)
@@ -54,7 +54,7 @@ module Board = {
   let render {props} => {
     let (r1, r2, r3) = props.board;
     let renderRow_ = renderRow props;
-    <div className=(Glamor.css [display "inline-table", cursor "default", userSelect "none"])>
+    <div className=(css [display "inline-table", cursor "default", userSelect "none"])>
       (renderRow_ r1 R1)
       (renderRow_ r2 R2)
       (renderRow_ r3 R3)

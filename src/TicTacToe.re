@@ -1,6 +1,6 @@
 open Game;
 
-open CSS;
+open Glamor;
 
 module TicTacToe = {
   include ReactRe.Component.Stateful;
@@ -72,7 +72,7 @@ module TicTacToe = {
     };
   let restart _ _ => Some initialState;
   let render {state, updater} =>
-    <div className=(Glamor.css [textAlign "center"])>
+    <div className=(css [textAlign "center"])>
       <h1> (ReactRe.stringToElement "Tic Tac Toe") </h1>
       <GitHubRibbon url="https://github.com/poeschko/reason-react-tictactoe" />
       <Board board=state.board gameState=state.gameState handleClick=(updater playTurn) />
