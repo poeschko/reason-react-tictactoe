@@ -17,6 +17,10 @@
   ],
   "author": "Jan Poeschko <jan@poeschko.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poeschko/reason-react-tictactoe.git"
+  },
   "dependencies": {
     "bs-director": "^0.0.1",
     "bs-glamor": "^0.1.0",
