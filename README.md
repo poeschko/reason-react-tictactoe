@@ -21,4 +21,5 @@ Take a look at [ReasonVienna/dev-setup](https://github.com/ReasonVienna/dev-setu
 
     git checkout master
     npm run docs
+    git commit -am "update docs"
     git push
