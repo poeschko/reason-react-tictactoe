@@ -10,7 +10,7 @@ module Board = {
     gameState: gameStateType,
     handleClick: (rowIdType, colIdType) => unit
   };
-  let renderField {gameState, handleClick} (field: fieldType) (cid: colIdType) (rid: rowIdType) => {
+  let renderField {gameState, handleClick} (rid: rowIdType) (cid: colIdType) (field: fieldType) => {
     let theCursor = gameState == Playing ? "pointer" : "default";
     let bg =
       switch gameState {
@@ -43,21 +43,21 @@ module Board = {
       )
     </span>
   };
-  let renderRow props (f1, f2, f3) rid => {
-    let renderField_ = renderField props;
+  let renderRow props rid (f1, f2, f3) => {
+    let renderField_ = renderField props rid;
     <div className=(css [display "table-row"])>
-      (renderField_ f1 C1 rid)
-      (renderField_ f2 C2 rid)
-      (renderField_ f3 C3 rid)
+      (renderField_ C1 f1)
+      (renderField_ C2 f2)
+      (renderField_ C3 f3)
     </div>
   };
   let render {props} => {
     let (r1, r2, r3) = props.board;
     let renderRow_ = renderRow props;
     <div className=(css [display "inline-table", cursor "default", userSelect "none"])>
-      (renderRow_ r1 R1)
-      (renderRow_ r2 R2)
-      (renderRow_ r3 R3)
+      (renderRow_ R1 r1)
+      (renderRow_ R2 r2)
+      (renderRow_ R3 r3)
     </div>
   };
 };
